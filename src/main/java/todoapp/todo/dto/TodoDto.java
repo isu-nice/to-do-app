@@ -2,8 +2,12 @@ package todoapp.todo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.hibernate.validator.constraints.Range;
 
+import javax.validation.constraints.AssertFalse;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 public class TodoDto {
     @AllArgsConstructor
@@ -12,32 +16,33 @@ public class TodoDto {
         @NotBlank(message = "할 일의 내용은 100자 미만이어야 합니다.")
         private String title;
 
-        @NotBlank(message = "우선 순위는 1이상이어야 합니다.")
+        @Positive
         private int todoOrder;
 
-        @NotBlank
+        @NotNull
+        @AssertFalse
         private boolean completed;
     }
 
     @AllArgsConstructor
     @Getter
     public static class Patch {
-        private long todoId;
+        private long id;
 
         @NotBlank(message = "할 일의 내용은 100자 미만이어야 합니다.")
         private String title;
 
-        @NotBlank(message = "우선 순위는 1이상이어야 합니다.")
+        @Range(min = 1)
         private int todoOrder;
 
-        @NotBlank
+        @NotNull
         private boolean completed;
     }
 
     @AllArgsConstructor
     @Getter
     public static class Response {
-        private long todoId;
+        private long id;
         private String title;
         private int todoOrder;
         private boolean completed;
