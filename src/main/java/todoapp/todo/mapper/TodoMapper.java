@@ -12,7 +12,7 @@ public interface TodoMapper {
 
     Todo todoPatchDtoToTodo(TodoDto.Patch requestBody);
 
-    TodoDto.Response todoToTodoResponse(Todo todo);
+    TodoDto.Response todoToTodoResponseDto(Todo todo);
 
-    List<TodoDto.Response> todosToTodoResponses(List<Todo> todos);
+    List<TodoDto.Response> todosToTodoResponseDtos(List<Todo> todos);
 }
