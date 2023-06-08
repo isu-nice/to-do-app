@@ -29,19 +29,30 @@ public class TodoService {
         return savedTodo;
     }
 
-    // 할 일의 내용 수정 (+ 한 일 완료 체크)
+    // 할 일의 내용 수정 (+ 할 일 완료 체크)
     public Todo updateTodo(Todo todo) {
         Todo findTodo = findVerifiedTodo(todo.getId());
 
-        Optional.ofNullable(todo.getTitle())
-                .ifPresent(findTodo::setTitle);
-        Optional.ofNullable(todo.getTodoOrder())
-                .ifPresent(findTodo::setTodoOrder);
-        Optional.ofNullable(todo.getCompleted())
-                .ifPresent(findTodo::setCompleted);
+        findTodo.setTodoOrder(todo.getTodoOrder());
+        findTodo.setTitle(todo.getTitle());
+        findTodo.setCompleted(todo.isCompleted());
+//        Optional.ofNullable(todo.getTitle())
+//                .ifPresent(findTodo::setTitle);
+//        Optional.of(todo.getTodoOrder())
+//                .ifPresent(findTodo::setTodoOrder);
 
         return todoRepository.save(findTodo);
     }
+
+/*    // 한 일 완료 체크
+    public Todo checkCompleted(Todo todo) {
+        Todo findTodo = findVerifiedTodo(todo.getId());
+
+        boolean isCompleted = findTodo.isCompleted();
+        findTodo.setCompleted(isCompleted);
+
+        return todoRepository.save(findTodo);
+    }*/
 
     // 등록되어있는 할일의 특정 id 입력하여 조회
     public Todo findTodo(long todoId) {
