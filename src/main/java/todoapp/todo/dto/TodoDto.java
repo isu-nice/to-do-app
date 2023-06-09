@@ -13,14 +13,14 @@ public class TodoDto {
     @AllArgsConstructor
     @Getter
     public static class Post {
-        @NotBlank(message = "할 일의 내용은 100자 미만이어야 합니다.")
+//        @NotBlank(message = "할 일의 내용은 100자 미만이어야 합니다.")
         private String title;
 
-        @Positive
+//        @Positive(message = "할 일의 순위는 1이상인 숫자여야 합니다.")
         private int todoOrder;
 
         @NotNull
-        @AssertFalse
+//        @AssertFalse(message = "등록할 때는 미완료(false) 상태여야 합니다.")
         private boolean completed;
     }
 
@@ -29,14 +29,18 @@ public class TodoDto {
     public static class Patch {
         private long id;
 
-        @NotBlank(message = "할 일의 내용은 100자 미만이어야 합니다.")
+//        @NotBlank(message = "할 일의 내용은 100자 미만이어야 합니다.")
         private String title;
 
-        @Range(min = 1)
+//        @Range(min = 1)
         private int todoOrder;
 
-        @NotNull
+//        @NotNull
         private boolean completed;
+
+        public void setId(long todoId) {
+            this.id = todoId;
+        }
     }
 
     @AllArgsConstructor
